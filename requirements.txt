@@ -7,7 +7,7 @@ bcrypt==4.2.1
 flask-bcrypt==1.0.1
 
 # Statistics
-pingouin==0.5.5
+pingouin==0.7.0
 statsmodels==0.14.4
 scipy==1.14.1
 pandas==2.2.3
