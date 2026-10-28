@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment files
+.env
+.flaskenv
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Instance data (database)
+instance/
+
+# Uploaded files
+uploads/
+
+# Jupyter notebooks (user-generated per study)
+notebooks/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Frontend build
+frontend/dist/
+
+# Vendored XOpat build/runtime artifacts
+vendor/xopat/openseadragon/
+vendor/xopat/build/
+vendor/xopat/coverage/
+vendor/xopat/ui/index.js
+vendor/xopat/ui/index.js.map
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+
+
+# Git worktrees
+.worktrees/
+
+# Browser/debug artifacts
+.playwright-cli/
+output/playwright/
+
+# Local runs and tool output
+.venv
+node_modules
+traces.jsonl
+test-results/
+playwright-report/
+.ruff_cache/
+.env.*
+!.env.example
+spare-backup-*.tar.gz
+syneval-backup-*.tar.gz

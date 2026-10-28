@@ -1,0 +1,3 @@
+-r requirements.txt
+jupyter==1.1.1
+pygwalker==0.5.0.0

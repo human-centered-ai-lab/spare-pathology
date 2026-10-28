@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 88" role="img" aria-labelledby="title description">
+  <title id="title">SPaRE mark</title>
+  <desc id="description">A pathology image and three multiple-choice rating questions.</desc>
+  <defs>
+    <clipPath id="tissue-window"><rect x="13" y="28" width="28" height="41" rx="5"/></clipPath>
+  </defs>
+  <rect x="10" y="15" width="80" height="66" rx="11" fill="#DBEAFE"/>
+  <rect x="5" y="9" width="81" height="66" rx="10" fill="#FFFFFF" stroke="#A8C1EA" stroke-width="1.6"/>
+  <circle cx="15" cy="19" r="2" fill="#1D4ED8"/>
+  <path d="M22 19h19" stroke="#5274A5" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="72" cy="19" r="1.3" fill="#A8C1EA"/>
+  <circle cx="78" cy="19" r="1.3" fill="#A8C1EA"/>
+  <rect x="13" y="28" width="28" height="41" rx="5" fill="#F9E7F0"/>
+  <g clip-path="url(#tissue-window)">
+    <path d="M10 32c9-7 17-3 20 5s-2 12 2 18 11 3 13 8v11H10Z" fill="#E8ADCD"/>
+    <path d="M15 28c-4 13 9 16 10 24s-7 11-5 20M35 27c8 12-3 16-1 25s11 10 10 18" fill="none" stroke="#D78CB9" stroke-width="3"/>
+    <g fill="#7A579D">
+      <ellipse cx="19" cy="36" rx="1.7" ry="2.5" transform="rotate(-25 19 36)"/>
+      <ellipse cx="32" cy="34" rx="1.5" ry="2" transform="rotate(28 32 34)"/>
+      <ellipse cx="25" cy="44" rx="2" ry="1.5" transform="rotate(22 25 44)"/>
+      <ellipse cx="35" cy="49" rx="1.5" ry="2.2" transform="rotate(-20 35 49)"/>
+      <ellipse cx="18" cy="54" rx="1.6" ry="2.2" transform="rotate(30 18 54)"/>
+      <ellipse cx="28" cy="59" rx="1.6" ry="2.4" transform="rotate(-26 28 59)"/>
+      <ellipse cx="36" cy="65" rx="1.8" ry="1.4"/>
+      <ellipse cx="17" cy="65" rx="1.4" ry="1.8"/>
+    </g>
+  </g>
+  <path d="M49 29h24" stroke="#5274A5" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="51" cy="35" r="2.6" fill="none" stroke="#A8C1EA" stroke-width="1.15"/>
+  <circle cx="61" cy="35" r="2.6" fill="none" stroke="#A8C1EA" stroke-width="1.15"/>
+  <circle cx="71" cy="35" r="2.6" fill="none" stroke="#1D4ED8" stroke-width="1.15"/>
+  <circle cx="71" cy="35" r="1.3" fill="#1D4ED8"/>
+  <path d="M49 46h18" stroke="#5274A5" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="51" cy="52" r="2.6" fill="none" stroke="#A8C1EA" stroke-width="1.15"/>
+  <circle cx="61" cy="52" r="2.6" fill="none" stroke="#1D4ED8" stroke-width="1.15"/>
+  <circle cx="61" cy="52" r="1.3" fill="#1D4ED8"/>
+  <circle cx="71" cy="52" r="2.6" fill="none" stroke="#A8C1EA" stroke-width="1.15"/>
+  <path d="M49 63h22" stroke="#5274A5" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="51" cy="69" r="2.6" fill="none" stroke="#1D4ED8" stroke-width="1.15"/>
+  <circle cx="51" cy="69" r="1.3" fill="#1D4ED8"/>
+  <circle cx="61" cy="69" r="2.6" fill="none" stroke="#A8C1EA" stroke-width="1.15"/>
+  <circle cx="71" cy="69" r="2.6" fill="none" stroke="#A8C1EA" stroke-width="1.15"/>
+</svg>

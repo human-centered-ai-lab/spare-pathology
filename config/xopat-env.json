@@ -1,0 +1,42 @@
+{
+  "core": {
+    "active_client": "spare",
+    "client": {
+      "spare": {
+        "domain": "/api/xopat/",
+        "path": "path",
+        "image_group_server": "/api/xopat",
+        "image_group_protocol": "`${path}/slides/${data}.dzi?v=2`",
+        "image_group_preview": "`${path}/slides/${data}_files/0/0_0.png?v=2`",
+        "data_group_server": "/api/xopat",
+        "data_group_protocol": "`${path}/slides/${data[0]}.dzi?v=2`",
+        "headers": {},
+        "js_cookie_expire": 365,
+        "js_cookie_path": "/",
+        "js_cookie_same_site": "",
+        "js_cookie_secure": false,
+        "js_cookie_domain": null,
+        "secureMode": false,
+        "redirectUrl": "redirect.php"
+      }
+    },
+    "setup": {
+      "locale": "en",
+      "scaleBar": true,
+      "statusBar": true,
+      "tileCache": true,
+      "permaLoadPlugins": false,
+      "bypassCookies": false,
+      "bypassCache": false,
+      "bypassCacheLoadTime": false,
+      "theme": "light",
+      "stackedBackground": false,
+      "maxImageCacheCount": 1200,
+      "webGlPreferredVersion": "2.0",
+      "headers": {},
+      "preferredFormat": "png",
+      "fetchAsync": false,
+      "disablePluginsUi": true
+    }
+  }
+}
