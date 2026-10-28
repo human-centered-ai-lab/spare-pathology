@@ -1,0 +1,253 @@
+/**
+ * @fileoverview xOpat Static configuration: 'ENV'
+ * @typedef xoEnv
+ */
+{ /**@lends xoEnv */
+    /* General xOpat Metadata */
+    "name": "xOpat",
+    "version": "2.2.2",
+    /* Where xOpat redirects the user in case of error */
+    "gateway": "../",
+    /* Active configuration in the "client" */
+    "active_client": "dev",
+    /**
+     * The Client App static configuration
+     * @typedef {{
+     *   domain: string,
+     *   path: string,
+     *   image_group_server: string,
+     *   image_group_protocol: string,
+     *   image_group_preview: string,
+     *   data_group_server: string,
+     *   data_group_protocol: string,
+     *   headers: ?Object,
+     *   js_cookie_expire: ?number,
+     *   js_cookie_path: ?string,
+     *   js_cookie_same_site: ?string,
+     *   js_cookie_secure: ?boolean,
+     *   secureMode: ?boolean,
+     *   redirectUrl: ?string,
+     *   production: ?boolean
+     * }} xoClientSetup
+     */
+    "client": {
+        "dev": {
+            /* The Viewer Domain Full URL including protocol NOTE: should end with a slash */
+            "domain": "http://localhost:8080/",
+            /*
+             The Path to the Viewer at given domain, so that 'domain+path+index.php' is the viewer index.
+             Use null to let the system detect the path automatically.
+            */
+            "path": "",
+            /*
+               Image Group Server for data not processed by visualizations, specifies the server and protocol
+               and the tissue file preview URL getter. Both latter are javascript one-liners resulting in a string.
+               Available are 'path' (image server URL) and 'data' (image identifier such as image path).
+               Server URL can be relative, if on the same server domain as the viewer.
+             */
+            "image_group_server": "/iipsrv/iipsrv.fcgi",
+            "image_group_protocol": "`${path}?Deepzoom=${data}.dzi`", //one-liner expression
+            "image_group_preview": "`${path}?Deepzoom=${data}_files/0/0_0.jpg`", //one-liner expression
+            /*
+               Data Group Server for visualized data, specifies the server and protocol as javascript one-liner
+               resulting in a string. Available are 'path' (image server URL) and 'data'
+               (string array of image identifiers such as image path).
+               Server URL can be relative, if on the same server domain as the viewer.
+
+               In case of parameter fetchAsync = true, data is a single string, not an array!
+             */
+            "data_group_server": "/iipsrv/iipsrv.fcgi",
+            "data_group_protocol": "`${path}#DeepZoomExt=${data.join(\",\")}.dzi`", //one-liner expression
+            // Can be overridden by params.headers
+            "headers": {},
+            /* Cookie Setup */
+            "js_cookie_expire": 365,
+            "js_cookie_path": "/",
+            "js_cookie_same_site": "", //string value, lowercase
+            "js_cookie_secure": false, //boolean - true/false
+            "js_cookie_domain": null, //by default the viewer domain
+            "secureMode": false,
+            /* Production mode (serve minified files if available) */
+            "production": false,
+            /* Where share-with-url links are sent: can be relative or absolute path (needs protocol) */
+            "redirectUrl": "redirect.php"
+        },
+        // We can keep multiple configurations within the file and switch between them...
+        "prod": {
+            "domain": "https://rationai-vis.ics.muni.cz/",
+            "path": null,
+            "image_group_server": "/iipsrv/iipsrv.fcgi",
+            "image_group_protocol": "`${path}?Deepzoom=${data}.dzi`",
+            "image_group_preview": "`${path}?Deepzoom=${data}_files/0/0_0.jpg`",
+            "data_group_server": "/iipsrv/iipsrv.fcgi",
+            "data_group_protocol": "`${path}#DeepZoomExt=${data.join(\",\")}.dzi`",
+            "headers": {},
+            "js_cookie_expire": 365,
+            "js_cookie_path": "/",
+            "js_cookie_same_site": "strict",
+            "js_cookie_secure": true,
+            "js_cookie_domain": null,
+            "secureMode": true,
+            "production": true,
+            "redirectUrl": "redirect.php"
+        }
+    },
+    /**
+     * The Viewer Default Settings, all overrideable through params configuration.
+     * @typedef {{
+     *   sessionName: ?string,
+     *   locale: ?string,
+     *   customBlending: ?boolean,
+     *   debugMode: ?boolean,
+     *   webglDebugMode: ?boolean,
+     *   scaleBar: ?boolean,
+     *   statusBar: ?boolean,
+     *   viewport: ?Object,
+     *   activeBackgroundIndex: ?number,
+     *   activeVisualizationIndex: ?number,
+     *   grayscale: ?boolean,
+     *   tileCache: ?boolean,
+     *   preventNavigationShortcuts: ?boolean,
+     *   permaLoadPlugins: ?boolean,
+     *   theme: ?string,
+     *   stackedBackground: ?boolean,
+     *   maxImageCacheCount: ?number,
+     *   webGlPreferredVersion: ?string,
+     *   headers: ?Object,
+     *   preferredFormat: ?string,
+     *   fetchAsync: ?boolean,
+     *   bypassCache: ?boolean,
+     *   bypassCookies: ?boolean,
+     *   bypassCacheLoadTime: ?boolean,
+     *   disablePluginsUi: ?boolean
+     * }} xoParams
+     */
+    "setup": {
+        //viewer session name/ID, can be overridden on background-level configuration
+        "sessionName": null,
+        // depends on available locales in locales/ folder
+        "locale": "en",
+        "customBlending": false,
+        "debugMode": false,
+        "webglDebugMode": false,
+        "scaleBar": true,
+        "statusBar": true,
+        // object that has {"zoomLevel":<zoom>,"point":{"x":<x>,"y":<y>}} default viewport position definition
+        // point is in the viewport coordinate system of OpenSeadragon
+        "viewport": null,
+        // default active indexes for image (background) and data (visualization) group
+        "activeBackgroundIndex": 0,
+        "activeVisualizationIndex": 0,
+        "grayscale": false,
+        "tileCache": true,
+        "preventNavigationShortcuts": false,
+        "permaLoadPlugins": true,
+        // can disable cookies support
+        "bypassCookies": false,
+        // can disable cache data loading
+        "bypassCache": false,
+        "bypassCacheLoadTime": false,
+        // can be dimmed, dark, light, auto
+        "theme": "auto",
+        "stackedBackground": false,
+        "maxImageCacheCount": 1200,
+        // can be 1.0 or 2.0
+        "webGlPreferredVersion": "2.0",
+        // custom headers for image fetching
+        "headers": {},
+        // can be anything that supports the protocol of your choice,
+        // ExtendedDZI supports "png", "zip", "jpg"
+        "preferredFormat": "zip",
+        "fetchAsync": false,
+        // Do not render plugin selection in GUI, but they can still be active
+        "disablePluginsUi": false,
+        // Renders viewer in standalone mode, all data is static (leave as false if unsure)
+        "isStaticPreview": false
+    },
+    /**
+     * The Server status. This object is here just for the reference and
+     * to provide default values; the server shall set up these properties accordingly.
+     * DO NOT modify these
+     * @typedef {{
+     *   name: string,
+     *   supportsPost: boolean
+     * }} xoServerState
+     */
+    "serverStatus": {
+        "name": null,
+        // Disable for servers that do not support POST parsing: will not support direct data sharing
+        "supportsPost": true
+    },
+
+    /**
+     * Below are project-specific paths used internally. Do not modify if you don't know what you are doing.
+     */
+    "monaco": "src/libs/monaco/",
+    "openSeadragonPrefix": "openseadragon/build/openseadragon/",
+    "openSeadragon": "openseadragon.js",
+
+    /**
+     * JS Source files. Each group conforms to pre-determined folder path.
+     */
+    "js": {
+        // src/libs      key: source / [sources,list]
+        "libs": {
+            "jquery": "jquery.min.js",
+            "i18n": ["i18next.jquery.min.js", "i18next.min.js"],
+            "kinetic": "kinetic-v5.1.0.min.js",
+            "scroll_to": "scrollTo.min.js",
+            "unzip_it": "unzipit.min.js"
+        },
+        // src/external  key: source / [sources,list]
+        "external": {
+            "protocols": [
+                "dziexttilesource.js",
+                "emptytilesource.js"
+            ],
+            "common": [
+                "enjoyhint.js",
+//                "cookie-storage.js",
+                "js.cookie.js",
+                "osd_tools.js",
+                "scalebar.js",
+                "nouislider.min.js",
+                "autocomplete.js"
+            ]
+        },
+        /**
+         * Unlike other keys, keys inside 'src' are pre-determined and must be kept:
+         * "env" sets up the browser environment - styles, todo: icons, coding libraries (jQuery)
+         * "loader" is the core component module functionality, loaded as soon as possible.
+         * "deps" are UI dependencies, loaded before JS index code.
+         * "app" contains the core files, loaded after JS index code.
+         *
+         *  key: source / [sources,list]
+         */
+        "src": {
+            //"env": "",
+            "loader": ["store.js", "loader.js"],
+            "deps": ["ui-components.js", "shader-configurator.js"],
+            "app": ["parse-input.js", "app.js", "user-interface.js", "scripts.js", "layers.js", "user.js"]
+        },
+        "ui": {
+          "van": ["index.js"]
+        }
+    },
+    /**
+     * Css files shadow the JS structure, with custom keys except for "src"
+     */
+    "css": {
+        "libs": {
+            "primer": "primer_css.css",
+            "fontawesome": "fontawesome/css/v6-all.css",
+            "tailwind": "tailwind.min.css"
+        },
+        "external": {
+            "enjoyhint": "enjoyhint.css",
+            "nouislider": "nouislider.css"
+        },
+        "src": {
+          "env": ["assets/style.css", "assets/xopat.css", "assets/custom.css"]
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "id": "profiler",
+    "name": "Measure tile loading time and run profiler",
+    "includes" : [
+        "profile.js"
+    ],
+    "version": "1.0.0",
+    "modules": ["snapshots", "menu-pages"],
+    "hidden": true,
+    "permaLoad": false
+}

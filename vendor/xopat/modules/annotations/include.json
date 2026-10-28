@@ -1,0 +1,30 @@
+{
+    "id": "annotations",
+    "name": "Annotations Module",
+    "description": "A module that brings annotations functionality.",
+    "version": "0.1.0",
+    "includes" : [
+        "annotations.js",
+        "ext/greiner-hormann.min.js",
+        "ext/magic-wand.js",
+        "ext/polygon-intersect.js",
+        "convert/convertor.js",
+        "convert/native.js",
+        "convert/asapXml.js",
+        "convert/geoJSON.js",
+        "convert/qupath.js",
+        "magic-wand.js",
+        "viewport-segmentation.js",
+        "presets.js",
+        "objects.js",
+        "objectGenericFactories.js",
+        "objectAdvancedFactories.js",
+        "freeFormTool.js",
+        "history.js"
+    ],
+    "requires": ["webgl", "fabricjs"],
+    // Whether to store presets in the local storage
+    "storeCacheSnapshots": true,
+    // Whether to include private annotations in module export
+    "exportPrivate" : false,
+}

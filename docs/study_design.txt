@@ -1,0 +1,216 @@
+Four-Center Multi-Reader Validation + Tier-3 Algorithmic
+Utility Evaluation
+Core Tier-2 Feature Fidelity Assessment for Synthetic
+Histopathology Images
+1. Scientific Rationale
+Synthetic histopathology images are increasingly used for augmentation, privacy-preserving
+sharing, and AI training. However, perceptual realism (Tier-1) does not guarantee preservation
+of diagnostically relevant features (Tier-2). This document specifies (i) a four-center, blinded
+reader study to validate a concise Tier-2 protocol and (ii) a Tier-3 algorithmic evaluation as-
+sessing downstream utility using multiple foundation-model feature extractors.
+2. Research Questions and Hypotheses
+2.1 Primary Research Question (Multi-center reader study)
+Is the Core Tier-2 scoring protocol reproducible across institutions and does it reliably distin-
+guish real from synthetic patches based on feature fidelity?
+2.2 Primary Hypothesis
+H1: Inter-rater reliability of the Core Tier-2 total score is high across centers.
+Target: ICC ≥ 0.75
+2.3 Secondary Hypotheses
+• H2: Center effects are small relative to between-image variability.
+• H3: Synthetic patches have lower Tier-2 scores than real patches.
+• H4: Key failure modes (e.g., stroma/ECM, TIL plausibility, synthetic artifacts) are consis-
+tently detected across centers.
+2.4 Tier-3 Research Question (algorithmic utility)
+Does training with synthetic augmentation improve downstream performance and generalization
+to external centers across multiple foundation-model feature pipelines?
+2.5 Tier-3 Hypotheses
+• H5: Synthetic augmentation improves out-of-center performance (Centers B–D) relative to
+real-only training.
+• H6: Improvements are consistent across multiple foundation-model feature extractors (ro-
+bustness to representation choice).
+1
+3. Study Overview
+• Tier-2 (Human): Four-center reader study (4 centers × 2 readers = 8 readers), blinded,
+using a centrally curated patch set (N = 180).
+• Tier-3 (Algorithmic): Single-center training (Center A) with external testing on Centers
+B–D, repeated across 4 foundation-model feature extractors.
+4. Tier-2 Multi-Center Reader Study Protocol (Option A, 4×2)
+4.1 Design
+• Prospective, blinded, multi-center reader study
+• 4 centers: A, B, C, D
+• 2 readers per center (target: 1 senior pathologist + 1 trainee/fellow)
+• Two sessions of 90 patches to reduce fatigue
+4.2 Dataset Construction
+N = 180, Nreal = 90, Nsynthetic = 90.
+Tissue categories (4)
+1. Tumor-dominant
+2. Stroma-dominant
+3. TIL/Inflammation-dominant
+4. Mixed / Transition
+Real patches (90): by tissue category
+Tissue Type Count
+Tumor-dominant 24
+Stroma-dominant 24
+TIL/Inflammation-dominant 24
+Mixed / Transition 18
+Synthetic patches (90): tissue category × quality band Synthetic patches are strat-
+ified by quality tertiles (High/Medium/Low) using a pre-specified automated proxy (e.g.,
+embedding similarity or internal quality score). Sampling is random within strata to prevent
+confounding.
+Per quality band (N = 30):
+Tissue Type Count per band
+Tumor-dominant 8
+Stroma-dominant 8
+TIL/Inflammation-dominant 8
+Mixed / Transition 6
+2
+Optional repeats (recommended) Include Nrepeat = 18 repeats (10% of N ) for intra-rater
+consistency:
+9 real + 9 synthetic,
+balanced across tissue categories and (for synthetic) across quality bands. Repeats are inserted
+at random positions.
+4.3 The Concrete Question(s) Asked to Raters
+Session-level instruction (shown once) Instruction: You will evaluate histopathology
+patches. Please assess feature fidelity and histologic consistency at the level of diagnosti-
+cally relevant structures. Do not attempt to decide whether a patch is real or synthetic.
+Per-patch umbrella question Umbrella question: “Are the diagnostically relevant fea-
+tures in this patch consistent with real H&E histology at this magnification, without non-physiologic
+patterns?”
+Per-patch structured questions (Core Tier-2, 6 items) Each item is scored on a 3-point
+ordinal scale:
+0 = inconsistent / clearly non-physiologic, 1 = borderline / minor inconsistencies, 2 = consistent with real
+1. F1 Nuclear detail & cytology: Are nuclear size/shape, chromatin texture, and nucleoli
+patterns consistent with real histology (no impossible nuclear patterns)?
+2. F2 Tissue architecture: Is the tissue organization (tumor/stroma boundaries, gland/nest
+structure, transitions) coherent (no broken topology or impossible transitions)?
+3. F3 Stroma / ECM realism: Is stromal/ECM texture consistent (no “plastic” appearance,
+melted background, or repeated fibrous motifs)?
+4. F4 Inflammation / TIL plausibility: Are inflammatory cells/TIL morphology and spatial
+distribution consistent (no “stamped” lymphocytes or unnatural clustering)?
+5. F5 Synthetic artifacts / hallucination markers: Are there visible synthetic artifacts
+(repetition, tiling seams, edge artifacts, non-biologic textures)? (0=clear artifacts; 1=possi-
+ble/subtle; 2=none visible)
+6. F6 Global clinical usability: Would you trust this patch enough to use it as evidence in
+diagnostic reasoning? (0=no; 1=limited/uncertain; 2=yes)
+Optional single “main failure reason” item (recommended) If any item was scored 0,
+select the main reason:
+• Nuclear/cytology inconsistency (F1)
+• Architecture incoherence (F2)
+• Stroma/ECM artifact (F3)
+• TIL/inflammation artifact (F4)
+• Obvious synthetic artifacts/repetition (F5)
+• Other (free text)
+3
+4.4 Total Score and Predefined Pass/Fail
+Stotal =
+6X
+i=1
+Fi, Stotal ∈ {0, . . . , 12}.
+Predefined Pass/Fail rule (agreement analysis)
+• Pass if Stotal ≥ 9 and F 5 ≥ 1
+• Fail otherwise
+4.5 Calibration, Blinding, and Procedure
+• Calibration: 15 annotated calibration patches (10–15 minutes).
+• Blinding: readers blinded to real/synthetic label, quality band, and source site.
+• Procedure: two blocks of 90 patches with recommended break.
+• Data capture: reader id, center id, patch id, F1–F6 (0/1/2), optional uncertainty flag, op-
+tional timestamps.
+4.6 Tier-2 Endpoints
+Primary
+• ICC for Stotal (two-way random effects, absolute agreement) with 95% CI.
+• Fleiss’ κ for Pass/Fail with 95% CI.
+Secondary
+• Feature-wise agreement (ICC or κ per feature).
+• Center effects via mixed-effects modeling.
+• Failure-mode consistency across centers (distribution of “main failure reason”).
+• Optional intra-rater reliability on repeated items.
+4.7 Tier-2 Statistical Model (center effects)
+Stotal ∼ center + (1|image) + (1|center:reader)
+Report center contrasts (effect size, CI). Conclude robust multi-center reproducibility if center
+effects are small relative to between-image variability.
+5. Tier-3 Algorithmic Evaluation Plan (Downstream Utility)
+5.1 Design Principles
+• Training conducted at one center (Center A) to create a strong domain-shift stress test.
+• External evaluation on held-out centers (Centers B–D) with no further tuning.
+• Repeated across four foundation-model feature extractors to test robustness to repre-
+sentation choice.
+• Strict leakage controls: synthetic generation uses Center A training split only.
+4
+5.2 Task Definition
+Specify one primary downstream task (choose based on available labels):
+• Slide-level classification (preferred): e.g., tumor vs non-tumor; subtype; grade component
+proxy.
+• Patch-level classification (if only patch labels exist).
+All splits must be at patient level (no patient overlap between train/val/test).
+5.3 Data Splits
+• Center A: train/val split (e.g., 80/20) for model development and early stopping.
+• Centers B–D: external test sets (100% held-out), used only once for final reporting.
+• No stain/scanner adaptation on B–D beyond fixed preprocessing determined on Center A.
+5.4 Training Conditions (per foundation model)
+For each representation pipeline, train identical downstream classifiers under:
+1. Real-only: train on Center A real data only.
+2. Real + Synthetic augmentation: add synthetic samples generated from Center A train
+split (stratified by tissue type and quality bands).
+3. (Optional) Synthetic-only: stress test; train only on synthetic, evaluate on real.
+5.5 Four Foundation-Model Feature Pipelines
+Use four distinct, well-known pathology (or general) foundation models as fixed feature extrac-
+tors. For each model m ∈ {1, 2, 3, 4}:
+• Extract tile/patch embeddings for all WSIs/patches using m.
+• Aggregate to slide-level (if needed) using a standard method (e.g., mean pooling, attention
+pooling, or MIL head).
+• Train a lightweight classifier (e.g., logistic regression / linear layer / shallow MLP) on Center
+A train split.
+Implementation note: To avoid reviewer debates, keep the downstream head identical
+across models wherever possible; the goal is to test robustness to representation choice, not to
+optimize architecture.
+5.6 Evaluation Metrics
+Primary (report per center B, C, D and pooled):
+• AUC (or balanced accuracy if binary not appropriate)
+• Sensitivity at fixed specificity (clinically interpretable operating point)
+• Calibration: Brier score or ECE (Expected Calibration Error)
+• 95% CIs via patient-level bootstrap
+Secondary:
+• Performance vs training-set size (learning curve): n ∈ {10, 20, 50, 100} (if feasible).
+• Robustness across tissue strata (tumor/stroma/TIL/mixed).
+5
+5.7 Leakage and Memorization Controls (must-have with synthetic data)
+• Synthetic data must be generated from Center A train split only.
+• Nearest-neighbor audit: compute embedding similarity between each synthetic sample and
+all real samples in:
+– Center A test split (if any),
+– Centers B–D test sets.
+Flag and remove near-duplicates above a pre-specified similarity threshold.
+• Report duplicate rate and confirm no overlap by patient/slide identifiers.
+5.8 Tier-3 Primary Endpoint (decision criterion)
+Tier-3 “utility” is supported if, for at least 3/4 foundation models, the Real+Synthetic condition
+improves external-center performance:
+∆AUCext > 0
+with consistent direction across B–D (or pooled), and without worsening calibration beyond a
+pre-specified tolerance.
+6. Risk Mitigation
+• Improve reader consistency: calibration + anchored wording (“consistent with real histol-
+ogy”).
+• Reduce fatigue: two-session design.
+• Prevent cherry-picking: stratified random sampling rule fixed a priori.
+• Prevent post-hoc tuning: thresholds fixed before analysis.
+• Prevent leakage: strict train-only synthesis + nearest-neighbor audits.
+7. Ethics and Data Protection
+Only de-identified patches/embeddings are used. No patient-identifying information is collected.
+Local exemption/waiver determination may be sought if required for reader participation.
+8. Timeline
+• Week 1: finalize patch set, strata labels, survey/tool setup; define Tier-3 task and splits.
+• Week 2: reader pilot (internal); implement embedding extraction pipelines for 4 foundation
+models.
+• Weeks 3–4: multi-center reader scoring; run Tier-3 training (Center A).
+• Week 5: analysis (Tier-2 ICC/κ; Tier-3 metrics + CIs; leakage audit).
+• Week 6: integrate results into manuscript + supplements (scoring guide, calibration set de-
+scription).
+6
+9. Planned Outputs
+• Table: dataset composition (real/synthetic, tissue strata, quality bands).
+• Table: Tier-2 reliability (ICC, κ) overall and per feature.
+• Figure: Tier-2 score distributions (real vs synthetic; by synthetic quality band).
+• Figure: center effects (estimated marginal means and contrasts).
+• Table/Figure: Tier-3 performance across centers and across 4 foundation models (real-only
+vs real+synthetic).
+• Appendix: full reader instruction sheet + calibration examples; leakage audit description.

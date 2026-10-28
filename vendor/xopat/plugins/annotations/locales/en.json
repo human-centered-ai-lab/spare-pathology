@@ -1,0 +1,10 @@
+{
+  "errors": {
+    "noTargetTissue": "No target tissue (background image) available.",
+    "noPresetAction": "You need to <a onclick=\"{{action}}\">set a preset</a> for annotation creation."
+  },
+  "showBoard": "Show board",
+  "onOff": "Enable/disable annotations",
+  "outlineOnly": "Outline only.",
+  "presetsInCookies": "Presets stored in cookies"
+}

@@ -1,0 +1,13 @@
+{
+    "id": "vega-secure",
+    "name": "VEGA: The visualization grammar (with secure interpreter)",
+    "includes" : [
+        {
+            "src": "https://cdn.jsdelivr.net/npm/vega-interpreter@1.0.5/build/vega-interpreter.min.js",
+            "crossOrigin": "anonymous",
+            "integrity": "sha384-9LanOUB60Mnbvh+fwRI/G5STHUPkO7uZitLePc1jEQdjQWSQy34Oc+TzpdvXTIh2"
+        },
+        "init.js"
+    ],
+    "requires": ["vega"]
+}

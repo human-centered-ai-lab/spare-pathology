@@ -1,0 +1,3 @@
+image_name,mpp_value,synthetic
+img_a.png,0.5,false
+img_b.png,1.0,true
