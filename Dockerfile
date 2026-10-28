@@ -1,4 +1,4 @@
-FROM node:24-bookworm-slim AS assets
+FROM node:25-bookworm-slim AS assets
 WORKDIR /build
 ENV CYPRESS_INSTALL_BINARY=0
 RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates \
